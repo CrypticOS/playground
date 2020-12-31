@@ -109,7 +109,8 @@ function compile(array) {
 
 		if (tokens[0].type == "label") {
 			labels[tokens[0].value] = Object.keys(labels).length;
-		} else if (tokens[0].value == "include") {
+		} else if (tokens[0].value == "inc") {
+			// Old node.js code
 			var data = fs.readFileSync(tokens[1].value, "utf8");
 			var findCode = data.split("\n");
 			for (l2 in findCode) {
@@ -215,7 +216,7 @@ function compile(array) {
 			break;
 		case "run":
 			output += "!"; // Reset for writing
-			output += putChar(labels[l] + 1); // copy return location
+			output += putChar(labels[l]); // copy return location
 			output += "^d"; // Up, right (for when return is called), and goto
 
 			output += "!"; // Reset for writing
@@ -273,7 +274,7 @@ function compile(array) {
 			break;
 		case "jmp":
 			output += "!"; // Reset cell for next adding
-			output += putChar(labels[checkLabel(tokens[1]).value] + 1);
+			output += putChar(labels[checkLabel(tokens[1]).value]);
 			output += "^$";
 			break;
 		case "equ":
@@ -291,7 +292,7 @@ function compile(array) {
 
 			// Copy in label
 			output += "a!"
-			output += putChar(labels[tokens[3].value] + 1); // put label
+			output += putChar(labels[tokens[3].value]); // put label
 			output += "^!";
 
 			// Restore value from register 4

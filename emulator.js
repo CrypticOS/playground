@@ -91,13 +91,13 @@ function execute(stack, code, speed) {
 		case '?':
 			//console.log(stack.top[stack.topP + 1], stack.top[stack.topP + 2], stack.top[stack.topP]);
 			if (stack.top[stack.topP + 1] == stack.top[stack.topP + 2]) {
-				c = labels[stack.top[stack.topP] - 1];
+				c = labels[stack.top[stack.topP]];
 			}
 
 			break;
 		case '$':
 			//console.log(labels[stack.top[stack.topP] - 1]);
-			c = labels[stack.top[stack.topP] - 1];
+			c = labels[stack.top[stack.topP]];
 			break;
 		}
 	}
